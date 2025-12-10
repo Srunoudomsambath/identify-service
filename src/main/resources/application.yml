@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: itp-identify-service
+  datasource:
+    url: jdbc:postgresql://localhost:5168/postgres
+    username: itp_usr
+    password: itp@168
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 9999
