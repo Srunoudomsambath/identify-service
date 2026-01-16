@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ItpIdentifyServiceApplication {
+public class IamServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ItpIdentifyServiceApplication.class, args);
+        SpringApplication.run(IamServiceApplication.class, args);
     }
 
 }
