@@ -94,6 +94,8 @@ public class SecurityInit {
                 .redirectUris(uris -> {
                     uris.add("http://localhost:9090/login/oauth2/code/itp-standard");
                     uris.add("http://localhost:9090");
+                    uris.add("http://localhost:9999/login/oauth2/code/itp-standard");
+                    uris.add("http://localhost:9999");
                     uris.add("https://cstad.edu.kh/");
                 })
                 .postLogoutRedirectUris(uris -> {
