@@ -104,22 +104,39 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    @Order(2)
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-//        successHandler.setDefaultTargetUrl("/");
-        http
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers("/login/oauth2/**","/resources/**", "/oauth2/login/**", "/public/**").permitAll()
-                        .anyRequest().authenticated())
-//                .formLogin(login -> login.successHandler(successHandler))
-                .formLogin(Customizer.withDefaults())
-                .cors(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable);
+//    @Bean
+//    @Order(2)
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+////        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+////        successHandler.setDefaultTargetUrl("/");
+//        http
+//                .authorizeHttpRequests(request -> request
+//                        .requestMatchers("/login/oauth2/**","/resources/**", "/oauth2/login/**", "/public/**").permitAll()
+//                        .anyRequest().authenticated())
+////                .formLogin(login -> login.successHandler(successHandler))
+////                .formLogin(Customizer.withDefaults())
+//                .formLogin(form -> form.loginPage("/login").permitAll())
+//                .cors(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable);
+//
+//
+//        return http.build();
+//    }
 
-        return http.build();
-    }
+@Bean
+@Order(2)
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+            .authorizeHttpRequests(request -> request
+                    .requestMatchers("/public/**").permitAll()
+                    .anyRequest().authenticated())
+            .formLogin(form -> form.loginPage("/login").permitAll())
+            .cors(AbstractHttpConfigurer::disable)
+            .csrf(AbstractHttpConfigurer::disable);
+
+    return http.build();
+}
+
 
 
 //    @Bean
