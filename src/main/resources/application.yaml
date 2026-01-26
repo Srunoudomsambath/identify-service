@@ -4,14 +4,14 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
   datasource:
-    url: jdbc:postgresql://localhost:16168/postgres
+    url: jdbc:postgresql://localhost:16850/postgres
     username: itpusr
     password: itp@168
     driver-class-name: org.postgresql.Driver
 # Strategy JPA
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
