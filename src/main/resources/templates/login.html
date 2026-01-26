@@ -1,414 +1,137 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
+    <!-- Preload Logo -->
+    <link
+            rel="preload"
+            as="image"
+            href="https://res.cloudinary.com/dkt1t22qc/image/upload/v1742348949/Prestataires_Documents/smj7n1bdlpjsfsotwpco.png"/>
 
-        .wave-bg {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wave {
-            position: absolute;
-            width: 200%;
-            height: 100%;
-            animation: wave 20s linear infinite;
-        }
-
-        .wave-layer-1 {
-            opacity: 0.3;
-            animation-duration: 18s;
-        }
-
-        .wave-layer-2 {
-            opacity: 0.2;
-            animation-duration: 25s;
-            animation-direction: reverse;
-        }
-
-        @keyframes wave {
-            0% {
-                transform: translateX(0) translateY(0);
-            }
-            50% {
-                transform: translateX(-25%) translateY(-20px);
-            }
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        .rocket-container {
-            position: relative;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(-5deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(-5deg);
-            }
-        }
-
-        .smoke {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            animation: smoke 2s ease-out infinite;
-        }
-
-        .smoke-1 {
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-delay: 0s;
-        }
-
-        .smoke-2 {
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-delay: 0.5s;
-        }
-
-        .smoke-3 {
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-delay: 1s;
-        }
-
-        @keyframes smoke {
-            0% {
-                opacity: 0.8;
-                transform: translateX(-50%) translateY(0) scale(0.5);
-            }
-            100% {
-                opacity: 0;
-                transform: translateX(-50%) translateY(100px) scale(1.5);
-            }
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #7c3aed;
-        }
-
-        .styled-input {
-            background: white;
-            border: 2px solid #e9d5ff;
-            transition: all 0.3s ease;
-        }
-
-        .styled-input:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-            outline: none;
-        }
-
-        .login-btn {
-            background: linear-gradient(135deg, #c026d3 0%, #9333ea 100%);
-            transition: all 0.3s ease;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(192, 38, 211, 0.3);
-        }
-
-        .checkbox-custom {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #c4b5fd;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .checkbox-custom:checked {
-            background: #7c3aed;
-            border-color: #7c3aed;
-        }
-
-        .checkbox-custom:checked::after {
-            content: '✓';
-            position: absolute;
-            color: white;
-            font-size: 14px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .social-btn {
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-    </style>
 </head>
-<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
 
-<div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden">
-    <div class="grid md:grid-cols-2 min-h-[700px]">
+<body
+        class="bg-cover bg-gradient-to-br from-[#7337FF] via-[#000000] to-[#0C7EA8]"
+        style="background-image:url(https://res.cloudinary.com/dkt1t22qc/image/upload/v1742348950/Prestataires_Documents/fopt5esl9cgvlcawz1z4.jpg)"
+>
 
-        <!-- Left Side - Welcome Section -->
-        <div class="wave-bg relative p-12 flex flex-col items-center justify-center text-white">
-            <!-- Animated Waves -->
-            <svg class="wave wave-layer-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
-                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
-                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
-            </svg>
-            <svg class="wave wave-layer-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
-            </svg>
+<div class="h-screen flex justify-center items-center backdrop-brightness-50">
+    <div class="flex flex-col items-center space-y-8">
 
-            <!-- Content -->
-            <div class="relative z-10 text-center max-w-md">
-                <h1 class="text-4xl font-bold mb-4 drop-shadow-lg">WELCOME TO THE WEBSITE</h1>
-                <p class="text-white/90 text-sm leading-relaxed mb-12">
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+        <!-- Logo -->
+        <img
+                src="https://res.cloudinary.com/dkt1t22qc/image/upload/v1742348949/Prestataires_Documents/smj7n1bdlpjsfsotwpco.png"
+                alt="TyBot Logo"
+                class="w-32 cursor-pointer"/>
 
-                <!-- Rocket Illustration -->
-                <div class="rocket-container relative inline-block">
-                    <svg class="w-64 h-64" viewBox="0 0 200 200">
-                        <!-- Smoke particles -->
-                        <circle class="smoke smoke-1" cx="100" cy="150" r="15" fill="white" opacity="0.4"/>
-                        <circle class="smoke smoke-2" cx="100" cy="150" r="15" fill="white" opacity="0.4"/>
-                        <circle class="smoke smoke-3" cx="100" cy="150" r="15" fill="white" opacity="0.4"/>
+        <!-- Card -->
+        <div
+                class="rounded-[20px] w-80 p-8 bg-[#310D84]"
+                style="box-shadow:-6px 3px 20px 4px #0000007d">
 
-                        <!-- Rocket Circle Background -->
-                        <circle cx="100" cy="100" r="85" fill="#9d174d"/>
+            <h1 class="text-white text-3xl font-bold mb-4 text-center">Login</h1>
 
-                        <!-- Small dots -->
-                        <circle cx="50" cy="120" r="6" fill="white"/>
-                        <circle cx="65" cy="135" r="8" fill="white"/>
-                        <circle cx="80" cy="145" r="5" fill="white"/>
-                        <circle cx="120" cy="145" r="6" fill="white"/>
-                        <circle cx="135" cy="135" r="7" fill="white"/>
-                        <circle cx="150" cy="120" r="5" fill="white"/>
-
-                        <!-- Cloud -->
-                        <ellipse cx="100" cy="150" rx="35" ry="12" fill="white"/>
-
-                        <!-- Rocket Body -->
-                        <g transform="translate(100, 60)">
-                            <!-- Main body -->
-                            <ellipse cx="0" cy="15" rx="22" ry="35" fill="white"/>
-
-                            <!-- Window -->
-                            <ellipse cx="0" cy="8" rx="15" ry="20" fill="#312e81"/>
-                            <ellipse cx="0" cy="8" rx="12" ry="16" fill="#4c1d95"/>
-                            <ellipse cx="-3" cy="5" rx="4" ry="5" fill="#7c3aed" opacity="0.5"/>
-
-                            <!-- Nose cone -->
-                            <path d="M 0,-20 L 15,5 L 0,-10 L -15,5 Z" fill="#c026d3"/>
-
-                            <!-- Fins -->
-                            <path d="M -22,30 L -35,55 L -22,45 Z" fill="#1e3a8a"/>
-                            <path d="M 22,30 L 35,55 L 22,45 Z" fill="#1e3a8a"/>
-
-                            <!-- Flames -->
-                            <ellipse cx="-10" cy="52" rx="5" ry="10" fill="#fbbf24" opacity="0.8"/>
-                            <ellipse cx="10" cy="52" rx="5" ry="10" fill="#fbbf24" opacity="0.8"/>
-                            <ellipse cx="0" cy="55" rx="6" ry="12" fill="#f59e0b"/>
-                        </g>
-                    </svg>
-                </div>
+            <!-- Error -->
+            <div th:if="${param.error}"
+                 class="mb-3 p-2 rounded bg-red-500/20 text-red-200 text-sm">
+                Invalid email or password
             </div>
-        </div>
 
-        <!-- Right Side - Login Form -->
-        <div class="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
-            <!-- Decorative circles -->
-            <div class="absolute top-10 right-10 w-64 h-64 bg-purple-600 rounded-full opacity-20 blur-3xl"></div>
-            <div class="absolute bottom-10 left-10 w-48 h-48 bg-pink-600 rounded-full opacity-20 blur-3xl"></div>
+            <!-- Logout -->
+            <div th:if="${param.logout}"
+                 class="mb-3 p-2 rounded bg-green-500/20 text-green-200 text-sm">
+                You have been logged out
+            </div>
 
-            <div class="relative z-10 w-full max-w-sm mx-auto">
-                <h2 class="text-3xl font-bold text-white mb-6 text-center">USER LOGIN</h2>
+            <!-- Login Form -->
+            <form th:action="@{/login}" method="post" class="space-y-4">
 
-                <!-- Error Message (Spring Security Authentication Failure) -->
-                <div th:if="${param.error}" class="mb-5 p-3 rounded-lg bg-red-50 border border-red-200">
-                    <div class="flex items-start">
-                        <svg class="w-4 h-4 text-red-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                        </svg>
-                        <div>
-                            <p class="text-xs font-medium text-red-800">
-                                Invalid username or password
-                            </p>
-                            <p class="text-xs text-red-700 mt-0.5">
-                                Please check your credentials and try again.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <!-- CSRF -->
+<!--                <input type="hidden"-->
+<!--                       th:name="${_csrf.parameterName}"-->
+<!--                       th:value="${_csrf.token}"/>-->
 
-                <!-- Logout Success Message -->
-                <div th:if="${param.logout}" class="mb-5 p-3 rounded-lg bg-green-50 border border-green-200">
-                    <div class="flex items-start">
-                        <svg class="w-4 h-4 text-green-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <p class="text-xs font-medium text-green-800">
-                            You have been successfully logged out
-                        </p>
-                    </div>
-                </div>
+                <input
+                        type="text"
+                        name="username"
+                        placeholder="Email address"
+                        required
+                        class="bg-[#8777BA] w-full p-2.5 rounded-md
+                               placeholder:text-gray-300 text-white
+                               shadow-md shadow-blue-950"/>
 
-                <form th:action="@{/login}" method="post" class="space-y-4">
-                    <!-- CSRF Token (Required for Spring Security) -->
-<!--                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+                <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                        class="bg-[#8777BA] w-full p-2.5 rounded-md
+                               placeholder:text-gray-300 text-white
+                               shadow-md shadow-blue-950"/>
 
-                    <!-- Username Input -->
-                    <div class="input-wrapper">
-                        <svg class="input-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                        <input
-                                type="text"
-                                id="username"
-                                name="username"
-                                placeholder="Username"
-                                required
-                                autofocus
-                                class="styled-input w-full pl-12 pr-4 py-3.5 rounded-xl text-gray-700"
-                        />
-                    </div>
-
-                    <!-- Password Input -->
-                    <div class="input-wrapper">
-                        <svg class="input-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                        </svg>
-                        <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Password"
-                                required
-                                class="styled-input w-full pl-12 pr-4 py-3.5 rounded-xl text-gray-700"
-                        />
-                    </div>
-
-                    <!-- Remember & Forgot -->
-                    <div class="flex items-center justify-between text-sm">
-                        <label class="flex items-center gap-2 text-white cursor-pointer">
-                            <input type="checkbox" id="remember-me" name="remember-me" class="checkbox-custom"/>
-                            <span>Remember</span>
-                        </label>
-                        <a href="#" class="text-purple-200 hover:text-white transition-colors">
-                            Forgot Password
-                        </a>
-                    </div>
-
-                    <!-- Login Button -->
-                    <button
-                            type="submit"
-                            class="login-btn w-full py-4 rounded-xl text-white font-semibold text-lg shadow-lg"
-                    >
-                        Login
-                    </button>
-                </form>
-
-                <!-- Divider -->
-                <div class="relative my-6">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-purple-400"></div>
-                    </div>
-                    <div class="relative flex justify-center text-xs">
-                        <span class="px-3 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 text-purple-200">Or continue with</span>
-                    </div>
-                </div>
-
-                <!-- Social Login Buttons -->
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <!-- Google -->
-                    <button
-                            onclick="window.location.href='/oauth2/authorization/google'"
-                            class="social-btn w-12 h-12 flex items-center justify-center bg-white rounded-full hover:bg-gray-50 shadow-md"
-                            title="Continue with Google"
-                    >
-                        <svg class="w-5 h-5" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                        </svg>
-                    </button>
-
-                    <!-- GitHub -->
-                    <button
-                            onclick="window.location.href='/oauth2/authorization/github'"
-                            class="social-btn w-12 h-12 flex items-center justify-center bg-gray-900 rounded-full hover:bg-gray-800 shadow-md"
-                            title="Continue with GitHub"
-                    >
-                        <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
-                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                        </svg>
-                    </button>
-
-                    <!-- Facebook -->
-                    <button
-                            onclick="window.location.href='/oauth2/authorization/facebook'"
-                            class="social-btn w-12 h-12 flex items-center justify-center bg-[#1877F2] rounded-full hover:bg-[#166FE5] shadow-md"
-                            title="Continue with Facebook"
-                    >
-                        <svg class="w-5 h-5" fill="white" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Sign Up Link -->
-                <div class="mt-6 text-center">
-                    <a href="#" class="text-purple-200 hover:text-white transition-colors text-sm">
-                        Sign Up
+                <div class="text-right">
+                    <a href="#" class="text-[#228CE0] text-xs hover:underline">
+                        Forget Password?
                     </a>
                 </div>
+
+                <button
+                        type="submit"
+                        class="h-10 w-full text-white rounded-md
+                               bg-gradient-to-br from-[#7336FF] to-[#3269FF]
+                               shadow-md shadow-blue-950">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="flex items-center my-4">
+                <div class="flex-grow border-t border-gray-400"></div>
+                <span class="px-2 text-gray-300 text-xs">OR</span>
+                <div class="flex-grow border-t border-gray-400"></div>
             </div>
+
+            <!-- Social Login -->
+            <div class="flex justify-center gap-4">
+
+                <!-- Google -->
+                <a th:href="@{/oauth2/authorization/google}"
+                   class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow hover:scale-105 transition">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg"
+                         class="w-5"/>
+                </a>
+
+                <!-- GitHub -->
+                <a th:href="@{/oauth2/authorization/github}"
+                   class="w-10 h-10 flex items-center justify-center bg-gray-900 rounded-full shadow hover:scale-105 transition">
+                    <img src="https://www.svgrepo.com/show/512317/github-142.svg"
+                         class="w-5 invert"/>
+                </a>
+
+                <!-- Facebook -->
+                <a th:href="@{/oauth2/authorization/facebook}"
+                   class="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full shadow hover:scale-105 transition">
+                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg"
+                         class="w-5"/>
+                </a>
+
+            </div>
+
+            <!-- Signup -->
+            <div class="text-gray-300 text-center mt-4 text-sm">
+                Don’t have an account?
+                <a href="/register" class="text-[#228CE0] hover:underline">
+                    Sign up
+                </a>
+            </div>
+
         </div>
-
     </div>
-</div>
-
-<!-- Footer -->
-<div class="absolute bottom-4 left-0 right-0 text-center">
-    <p class="text-gray-600 text-sm flex items-center justify-center gap-2">
-        designed by
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-        </svg>
-        <span class="font-semibold">freepik</span>
-    </p>
 </div>
 
 </body>
